@@ -1,0 +1,12 @@
+name = "Super Login Page"
+description = "Improves the Drupal login page."
+
+core = 7.x
+package  = User interface
+
+;stylesheets[all][] = css/super-login.css
+;files[] = ccl.admin.inc
+;dependencies[] = views
+;scripts[] = js/super-login.js
+
+configure = admin/config/user-interface/super-login

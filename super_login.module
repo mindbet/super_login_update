@@ -1,0 +1,96 @@
+<?php
+
+/**
+ * @file
+ *
+ * Create a better login system
+ */
+ 
+ 
+ /**
+ * Implementation of hook_form_alter().
+ *
+ * Autofocus on the username field.
+ * Some proper page titles would be nice for a change.. User account is a bit boring..
+ */
+function super_login_form_alter(&$form, &$form_state, $form_id) {  
+  if ($form_id == 'user_login' || $form_id == 'user_register_form' || $form_id == 'user_pass' || $form_id == 'user_pass_reset') {
+    // Set auto-focus and remove descriptions      
+    $form['name']['#attributes']['autofocus'] = 'autofocus';    
+    unset($form['name']['#description']);
+    unset($form['pass']['#description']);
+  }
+
+  switch ($form_id) {
+    case 'user_login':      
+      
+      $path = drupal_get_path('module', 'super_login');
+      $form['#attached']['css'][] = $path .'/css/super-login.css';
+      $form['#attached']['js'][] = $path . '/js/super-login.js';
+
+      $form['title'] = array(
+        '#markup' => '<p class="login-title">' . t('Log In') . '</p>',
+        '#weight' => -100,        
+      );
+      
+      
+      $reset_link = l(t('Forgot Password?'), 'user/password', array('attributes' => array('title' => t('Get a new password'))));
+      $form['reset'] = array(
+        '#markup' => '<p class="super-login-password">' . $reset_link . '</p>',
+        '#weight' => 1,        
+      );
+      $form['capslock'] = array(
+        '#markup' => '<div id="capslockdiv"><p style="display: none;">' .  t('Caps Lock On') . '</p></div>',
+        '#weight' => 2,        
+      );
+       
+      if (user_register_access()):
+        $actions_suffix = '<div class="actions-suffix">';    
+        $actions_suffix .= l(t('Create new account'), 'user/register', array('attributes' => array('class' => 'super-login-register', 'title' => t('Create a new user account'))));
+        $actions_suffix .= '</div>';
+        $form['actions']['#suffix'] = $actions_suffix;
+      endif;      
+      
+      $form['name']['#title'] = t('Username or e-mail address');
+      $form['name']['#size'] = 50;
+      $form['pass']['#size'] = 50;      
+      
+      // Set form placeholder text
+      $form['name']['#attributes']['title'] = $form['name']['#title'];
+      $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+      $form['pass']['#attributes']['title'] = $form['pass']['#title'];
+      $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+      
+      // If logintoboggan is installed and email login email is enabled then skip our own email login modification
+      if (!module_exists('logintoboggan') && !variable_get('logintoboggan_login_with_email', 0)){
+        // Ensure a valid validate array to allow login with e-mail address.
+        $form['#validate'] = is_array($form['#validate']) ? $form['#validate'] : array();
+        // LT's validation function must run first.
+        array_unshift($form['#validate'],'logintoboggan_user_login_validate');  
+      }
+            
+      
+      break;
+
+    case 'user_register_form':
+      //drupal_set_title(t('Register'));
+      
+      // The registration form behaves differently...
+      $form['account']['name']['#attributes']['autofocus'] = 'autofocus';
+      break;
+
+    case 'user_pass':
+      //drupal_set_title(t('Forgot your password?'));
+      break;
+
+    case 'user_pass_reset':
+      drupal_set_title(t('Reset password'));
+      break;
+  }
+}
+
+
+function super_login_form_user_pass_alter(&$form, &$form_state, $form_id) {  
+  $form['name']['#attributes']['title'] = $form['name']['#title'];
+  $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+}

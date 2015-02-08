@@ -1,0 +1,98 @@
+h1#page-title{
+  display:none;
+}
+p.login-title{
+  font-weight:bold;
+  font-size:1.5em;
+  margin:0;
+  color:#555;
+}
+#user-login{
+  margin-bottom:2em;
+}
+#user-login .description{
+  font-size:11px;
+  color:#777;
+  padding-left:10px;
+}
+
+#edit-name
+{
+   background: #fff url("email.png") no-repeat 5px center;
+   background-size: 1em 1em;
+   text-indent:2em;
+   border: 1px solid #aaa;   
+}
+
+
+#edit-pass{ 
+    background: #fff url("password.png") no-repeat 5px center;
+    background-size: 1em 1em;
+    text-indent:2em;
+    border: 1px solid #aaa
+}
+
+#user-login{
+  width:60%;
+  margin:0 auto;
+  border:5px solid #555;
+  padding:1em;
+}
+
+#user-login .actions-suffix{
+  float:right;
+  position:relative;
+  bottom:10px;
+}
+
+#edit-actions{  
+  margin-top:1em;
+}
+
+#user-login #edit-submit{
+  width: 113px;
+  height: 35px;  
+  background: url("login-button.jpg") no-repeat;
+  border: none;
+  font-size: 0;  
+}
+
+#user-login #edit-submit{
+  cursor: pointer;
+}
+
+#user-login label{
+  font-weight:normal;
+  font-size:.8em;
+}
+
+.form-item-pass,
+p.super-login-password{
+  display:inline-block;  
+}
+p.super-login-password{
+  font-size:.9em;
+  margin:0 0 0 1em;
+}
+
+  
+#user-login .form-item.form-item-name{
+  margin:1em 0;
+}
+#user-login .form-item.form-item-pass{
+  margin:0;
+}
+#capslockdiv{
+  height:1em;
+}
+
+#capslockdiv P{
+  color:#c61414;
+  margin:0;
+  background:url("warning.png") left center no-repeat;
+  background-size: 1em 1em;
+  text-indent:1.25em;
+  font-size:.75em;
+  margin-top:.5em;
+  margin-left:1.5em;  
+}
