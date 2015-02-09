@@ -138,3 +138,10 @@ function super_login_user_login_validate($form, &$form_state) {
     }
   }
 }
+
+// Remove tabs from login/password pages
+function super_login_menu_alter(&$items) {  
+  $items['user/register']['type'] = MENU_CALLBACK;
+  $items['user/login']['type'] = MENU_CALLBACK;
+  $items['user/password']['type'] = MENU_CALLBACK;  
+}

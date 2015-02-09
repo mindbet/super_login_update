@@ -1,6 +1,8 @@
-h1#page-title{
+h1#page-title,
+h1.page-header{
   display:none;
 }
+
 p.login-title{
   font-weight:bold;
   font-size:1.5em;
@@ -73,6 +75,7 @@ p.login-title{
 
 #user-pass label,
 #user-login label{
+  display:block;
   font-weight:normal;
   font-size:.8em;
 }
@@ -89,7 +92,7 @@ p.forgot-password{
   margin-left:1em;
 }
 
-  
+#user-pass .form-item.form-item-name,
 #user-login .form-item.form-item-name{
   margin:1em 0;
 }
@@ -129,4 +132,14 @@ input.form-text:focus {
     outline: none;
     border-color: #0088cc;
     box-shadow: 0 0 8px #9ecaed;
+}
+
+input.form-control{
+  display:inline;
+  width:auto;
+}
+
+input:-webkit-autofill {
+   color: #fff !important;
+   background:none;
 }
