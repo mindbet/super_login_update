@@ -1,1 +1,7 @@
-name = Super Login
+name = "Super Login Page"
+description = "Improves the Drupal login page."
+
+core = 7.x
+package  = User interface
+
+configure = admin/config/user-interface/super-login

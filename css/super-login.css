@@ -32,8 +32,10 @@ p.login-title{
     border: 1px solid #aaa
 }
 
-#user-login{
-  width:60%;
+#user-login,
+#user-pass
+{
+  max-width:600px;
   margin:0 auto;
   border:5px solid #555;
   padding:1em;
@@ -57,17 +59,26 @@ p.login-title{
   font-size: 0;  
 }
 
+#user-pass #edit-submit{
+  width: 159px;
+  height: 35px;  
+  background: url("password-reset.jpg") no-repeat;
+  border: none;
+  font-size: 0;  
+}
+
 #user-login #edit-submit{
   cursor: pointer;
 }
 
+#user-pass label,
 #user-login label{
   font-weight:normal;
   font-size:.8em;
 }
 
 .form-item-pass,
-p.super-login-password{
+p.forgot-password{
   display:inline-block;  
 }
 p.super-login-password{
@@ -95,4 +106,24 @@ p.super-login-password{
   font-size:.75em;
   margin-top:.5em;
   margin-left:1.5em;  
+}
+
+#user-pass .messages{
+  margin:0 0 1em 0;
+}
+
+.back-to-login{
+  font-size:.9em;
+  float:right;
+  margin:0 1em .125em 0;
+}
+
+input.form-text{
+  border: 2px solid #dadada;  
+}
+
+input.form-text:focus { 
+    outline: none;
+    border-color: #0088cc;
+    box-shadow: 0 0 8px #9ecaed;
 }
