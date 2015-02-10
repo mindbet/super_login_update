@@ -5,6 +5,7 @@ Drupal.behaviors.moduleFilterDynamicPosition = {
     var $window = $(window);
     
     $(".messages").prependTo("#user-login");
+    $(".alert").prependTo("#user-login");
     $('#edit-pass').keypress(function(e) {
       var s = String.fromCharCode( e.which );
       if ( s.toUpperCase() === s && s.toLowerCase() !== s && !e.shiftKey ) {

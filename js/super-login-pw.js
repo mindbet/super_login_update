@@ -5,7 +5,7 @@ Drupal.behaviors.moduleFilterDynamicPosition = {
     var $window = $(window);
 
     $(".messages").prependTo("#user-pass");
-  
+    $(".alert").prependTo("#user-pass");
   }
 };
 
