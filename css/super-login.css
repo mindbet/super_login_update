@@ -110,7 +110,10 @@ p.login-title{
   font-weight:normal;
   font-size:.8em;
 }
-
+.form-item{
+  max-width:100%;
+  overflow:hidden;
+}
 .form-item-pass,
 p.forgot-password{
   display:inline-block;  
@@ -169,4 +172,10 @@ input.form-text:focus {
 input.form-control{
   display:inline;
   width:auto;
+}
+
+
+/* Remove Chrome's autofill yellow */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
