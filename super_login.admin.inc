@@ -48,7 +48,13 @@ function super_login_admin_form() {
     '#type'  => 'checkbox',
     '#title' => t('Enable autofill features for browsers'),    
     '#default_value' => variable_get('super_login_autofill', 1),    
-    '#description' => t('Disable this option to disable the autofill feature in browsers that will fill in the login form username and password automatically. Note, it appers later versions of Chrome now ignore this setting.'),    
+    '#description' => t('Disable this option to disable the autofill feature used by browsers to will fill in the login form username and password automatically. Note that it appears later versions of Chrome now ignore this setting.'),    
+  );
+  $form['super_login_placeholder'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Enable "placehold" text within fields.'),    
+    '#default_value' => variable_get('super_login_placeholder', 1),    
+    '#description' => t('Disable this option to remove the placeholder text within the login and password reset fields.'),    
   );
   return system_settings_form($form);
 
