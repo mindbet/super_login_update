@@ -44,34 +44,31 @@ function super_login_permission(){
 }
 
  /**
- * Implementation of hook_form_alter().
- *
- * Autofocus on the username field.
- * TODO:// notes...
+ * Implementation of hook_form_alter(). *
+ *  
  */
 function super_login_form_alter(&$form, &$form_state, $form_id) {  
-  if ($form_id == 'user_login' || $form_id == 'user_register_form' || $form_id == 'user_pass' || $form_id == 'user_pass_reset') {
-    // Set auto-focus and remove descriptions      
+  if ($form_id == 'user_login' || $form_id == 'user_pass') {      
+    // Global form functions          
     $form['name']['#attributes']['autofocus'] = 'autofocus';    
     unset($form['name']['#description']);
     unset($form['pass']['#description']);
     $path = drupal_get_path('module', 'super_login');
+    if (variable_get('super_login_css', 1)){
+        $form['#attached']['css'][] = $path .'/css/super-login.css';
+        if (variable_get('super_login_button_image', 1)){
+          $form['#attached']['css'][] = $path .'/css/super-login-buttons.css';
+        }
+      }
   }  
   
   switch ($form_id) {
-    case 'user_login':            
-      
-      if (variable_get('super_login_css', 1)){
-        $form['#attached']['css'][] = $path .'/css/super-login.css';
-      }
-      
+    case 'user_login':
       $form['#attached']['js'][] = $path . '/js/super-login.js';
-
       $form['title'] = array(
         '#markup' => '<p class="login-title">' . t('Log In') . '</p>',
         '#weight' => -100,        
-      );      
-      
+      );            
       $link = l(t(variable_get('super_login_forgot_pw_text', 'Forgot Password?')), 'user/password', array('attributes' => array('title' => t('Get a new password'))));
       $form['reset'] = array(
         '#markup' => '<p class="forgot-password">' . $link . '</p>',
@@ -80,8 +77,8 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
       $form['capslock'] = array(
         '#markup' => '<div id="capslockdiv"><p style="display: none;">' .  t(variable_get('super_login_capslock_msg', 'Caps Lock On')) . '</p></div>',
         '#weight' => 2,        
-      );
-       
+      );       
+      
       if (user_register_access()):
         $actions_suffix = '<div class="actions-suffix">';    
         $actions_suffix .= l(t(variable_get('super_login_new_account_text', 'Create new account')), 'user/register', array('attributes' => array('class' => 'super-login-register', 'title' => t('Create a new user account'))));
@@ -100,7 +97,7 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
         $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
         $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];  
       }
-      
+            
       // If logintoboggan is installed and email login email is enabled then skip our own email login modification
       if (!module_exists('logintoboggan') && !variable_get('logintoboggan_login_with_email', 0)){
         // Ensure a valid validate array to allow login with e-mail address.
@@ -108,17 +105,13 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
         // LT's validation function must run first.
         array_unshift($form['#validate'],'super_login_user_login_validate');  
       }
+      
       if (!variable_get('super_login_autofill', 1)){
         $form['#attributes']['autocomplete'] = 'off';
         $form['name']['#attributes']['autocomplete'] = 'off';
         $form['pass']['#attributes']['autocomplete'] = 'off';
       }
       break;
-
-    case 'user_register_form':      
-      $form['account']['name']['#attributes']['autofocus'] = 'autofocus';
-      break;
-
     case 'user_pass':      
       $form['#attached']['js'][] = $path . '/js/super-login-pw.js';
       
@@ -130,10 +123,7 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
       $form['reset'] = array(
         '#markup' => '<p class="back-to-login">' . $link . '</p>',
         '#weight' => 1,        
-      ); 
-      if (variable_get('super_login_css', 1)){
-        $form['#attached']['css'][] = $path .'/css/super-login.css';
-      }
+      );      
       break;
   }
 }
