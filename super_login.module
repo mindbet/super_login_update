@@ -69,24 +69,24 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => '<p class="login-title">' . t('Log In') . '</p>',
         '#weight' => -100,        
       );            
-      $link = l(t(variable_get('super_login_forgot_pw_text', 'Forgot Password?')), 'user/password', array('attributes' => array('title' => t('Get a new password'))));
+      $link = l(variable_get('super_login_forgot_pw_text', 'Forgot Password?'), 'user/password', array('attributes' => array('title' => t('Get a new password'))));
       $form['reset'] = array(
         '#markup' => '<p class="forgot-password">' . $link . '</p>',
         '#weight' => 1,        
       );
       $form['capslock'] = array(
-        '#markup' => '<div id="capslockdiv"><p style="display: none;">' .  t(variable_get('super_login_capslock_msg', 'Caps Lock On')) . '</p></div>',
+        '#markup' => '<div id="capslockdiv"><p style="display: none;">' .  variable_get('super_login_capslock_msg', 'Caps Lock On') . '</p></div>',
         '#weight' => 2,        
       );       
       
       if (user_register_access()):
         $actions_suffix = '<div class="actions-suffix">';    
-        $actions_suffix .= l(t(variable_get('super_login_new_account_text', 'Create new account')), 'user/register', array('attributes' => array('class' => 'super-login-register', 'title' => t('Create a new user account'))));
+        $actions_suffix .= l(variable_get('super_login_new_account_text', 'Create new account'), 'user/register', array('attributes' => array('class' => 'super-login-register', 'title' => t('Create a new user account'))));
         $actions_suffix .= '</div>';
         $form['actions']['#suffix'] = $actions_suffix;
       endif;      
       
-      $form['name']['#title'] = t(variable_get('super_login_login_title', 'Username or e-mail address'));
+      $form['name']['#title'] = variable_get('super_login_login_title', 'Username or e-mail address');
       $form['name']['#size'] = 50;
       $form['pass']['#size'] = 50;      
       
@@ -116,10 +116,10 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
       $form['#attached']['js'][] = $path . '/js/super-login-pw.js';
       
       $form['title'] = array(
-        '#markup' => '<p class="login-title">' . t(variable_get('super_login_password_reset_title', 'Password Reset')) . '</p>',
+        '#markup' => '<p class="login-title">' . variable_get('super_login_password_reset_title', 'Password Reset') . '</p>',
         '#weight' => -100,        
       );    
-      $link = l(t('Back to login page'), 'user/login', array('attributes' => array('title' => t(variable_get('super_login_back_link', 'Go back to the login page.')))));
+      $link = l(t('Back to login page'), 'user/login', array('attributes' => array('title' => variable_get('super_login_back_link', 'Go back to the login page.'))));
       $form['reset'] = array(
         '#markup' => '<p class="back-to-login">' . $link . '</p>',
         '#weight' => 1,        
