@@ -1,7 +1,6 @@
 <?php
 
-function super_login_admin_form() {
-  
+function super_login_admin_form() {  
   $form['text'] = array(
     '#type' => 'fieldset',
     '#title' => t('Text String Options'),
