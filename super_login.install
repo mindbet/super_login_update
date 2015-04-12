@@ -17,6 +17,7 @@ function super_login_install() {
  */
 function super_login_uninstall() {
   variable_del('super_login_forgot_pw_text');
+  variable_del('super_login_log_in_text');
   variable_del('super_login_capslock_msg'); 
   variable_del('super_login_new_account_text'); 
   variable_del('super_login_login_title'); 
