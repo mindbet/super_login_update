@@ -48,7 +48,7 @@ function super_login_permission(){
  *  
  */
 function super_login_form_alter(&$form, &$form_state, $form_id) {  
-  if ($form_id == 'user_login' || $form_id == 'user_pass') {      
+  if ($form_id == 'user_login' || $form_id == 'user_pass'|| $form_id == 'user_login_block') {
     // Global form functions          
     $form['name']['#attributes']['autofocus'] = 'autofocus';    
     unset($form['name']['#description']);
@@ -106,6 +106,37 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
         array_unshift($form['#validate'],'super_login_user_login_validate');  
       }
       
+      if (!variable_get('super_login_autofill', 1)){
+        $form['#attributes']['autocomplete'] = 'off';
+        $form['name']['#attributes']['autocomplete'] = 'off';
+        $form['pass']['#attributes']['autocomplete'] = 'off';
+      }
+      break;
+    case 'user_login_block':
+      $form['#attached']['js'][] = $path . '/js/super-login.js';
+
+      $form['capslock'] = array(
+          '#markup' => '<div id="capslockdiv"><p style="display: none;">' .  t(variable_get('super_login_capslock_msg', 'Caps Lock On')) . '</p></div>',
+          '#weight' => 2,
+      );
+      $form['name']['#title'] = t(variable_get('super_login_login_title', 'Username or e-mail address'));
+
+      // Set form placeholder text
+      if (variable_get('super_login_placeholder', 1)){
+        $form['name']['#attributes']['title'] = $form['name']['#title'];
+        $form['pass']['#attributes']['title'] = $form['pass']['#title'];
+        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+      }
+
+      // If logintoboggan is installed and email login email is enabled then skip our own email login modification
+      if (!(module_exists('logintoboggan') && variable_get('logintoboggan_login_with_email', 0))){
+        // Ensure a valid validate array to allow login with e-mail address.
+        $form['#validate'] = is_array($form['#validate']) ? $form['#validate'] : array();
+        // LT's validation function must run first.
+        array_unshift($form['#validate'],'super_login_user_login_validate');
+      }
+
       if (!variable_get('super_login_autofill', 1)){
         $form['#attributes']['autocomplete'] = 'off';
         $form['name']['#attributes']['autocomplete'] = 'off';
