@@ -61,9 +61,17 @@ function super_login_admin_form() {
   $form['options']['super_login_button_image'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Enable image replacement for submit buttons'),    
-    '#default_value' => variable_get('super_login_button_image', 1),
-    '#disabled' => variable_get('super_login_css', 1) ? FALSE : TRUE,    
-    '#description' => t('Disable this option to remove the images on the submit buttons.'),    
+    '#default_value' => variable_get('super_login_button_image', 1),        
+    '#description' => t('Disable this option to remove the images on the submit buttons.'),
+  );
+  $form['options']['super_login_submit_text'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Enter the text to display on the submit button'),    
+    '#default_value' => variable_get('super_login_submit_text', 'Log in'),        
+    '#description' => t('Disable this option to remove the images on the submit buttons.'),
+    '#states' => array(
+      'visible' => array(':input[name=super_login_button_image]' => array('checked' => FALSE)),
+    ),    
   );
   $form['options']['super_login_autofill'] = array(
     '#type'  => 'checkbox',
