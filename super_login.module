@@ -112,7 +112,7 @@ function super_login_form_alter(&$form, &$form_state, $form_id) {
         $form['pass']['#attributes']['autocomplete'] = 'off';
       }
       if (!variable_get('super_login_button_image', 1)){      
-        $form['actions']['submit']['#value'] = variable_get('super_login_submit_text', 'Log in');
+        $form['actions']['submit']['#value'] = t(variable_get('super_login_submit_text', 'Log in'));
       }
       break;
       
