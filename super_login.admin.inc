@@ -1,6 +1,6 @@
 <?php
 
-function super_login_admin_form() {  
+function super_login_admin_form() {
   $form['text'] = array(
     '#type' => 'fieldset',
     '#title' => t('Text String Options'),
@@ -47,46 +47,52 @@ function super_login_admin_form() {
     '#default_value' => variable_get('super_login_back_link', 'Go back to the login page.'),
     '#description' => 'Enter the text to be displayed for the "back to login page" link.',
   );
-  
+
  $form['options'] = array(
     '#type' => 'fieldset',
     '#title' => t('Configuration Options'),
   );
   $form['options']['super_login_css'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Enable module CSS (stylesheet)'),    
-    '#default_value' => variable_get('super_login_css', 1),    
-    '#description' => t('Disable this option to turn off this module\'s CSS style sheet. If disabled, you should provide your own styling through your theme\'s stylesheet.'),    
+    '#title' => t('Enable module CSS (stylesheet)'),
+    '#default_value' => variable_get('super_login_css', 1),
+    '#description' => t('Disable this option to turn off this module\'s CSS style sheet. If disabled, you should provide your own styling through your theme\'s stylesheet.'),
   );
   $form['options']['super_login_button_image'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Enable image replacement for submit buttons'),    
-    '#default_value' => variable_get('super_login_button_image', 1),        
+    '#title' => t('Enable image replacement for submit buttons'),
+    '#default_value' => variable_get('super_login_button_image', 1),
     '#description' => t('Disable this option to remove the images on the submit buttons.'),
   );
   $form['options']['super_login_submit_text'] = array(
     '#type'  => 'textfield',
-    '#title' => t('Enter the text to display on the submit button'),    
-    '#default_value' => variable_get('super_login_submit_text', 'Log in'),        
+    '#title' => t('Enter the text to display on the submit button'),
+    '#default_value' => variable_get('super_login_submit_text', 'Log in'),
     '#description' => t('Disable this option to remove the images on the submit buttons.'),
     '#states' => array(
       'visible' => array(':input[name=super_login_button_image]' => array('checked' => FALSE)),
-    ),    
+    ),
   );
   $form['options']['super_login_autofill'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Enable autofill features for browsers'),    
-    '#default_value' => variable_get('super_login_autofill', 1),    
-    '#description' => t('Disable this option to disable the autofill feature used by browsers to will fill in the login form username and password automatically. Note that it appears later versions of Chrome now ignore this setting.'),    
+    '#title' => t('Enable autofill features for browsers'),
+    '#default_value' => variable_get('super_login_autofill', 1),
+    '#description' => t('Disable this option to disable the autofill feature used by browsers to will fill in the login form username and password automatically. Note that it appears later versions of Chrome now ignore this setting.'),
+  );
+  $form['options']['super_login_autofocus'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Enable autofocus for username field'),
+    '#default_value' => variable_get('super_login_autofocus', 0),
+    '#description' => t('Enable this option for browsers to automatically set the focus in username field. '),
   );
   $form['options']['super_login_placeholder'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Enable "placehold" text within fields.'),    
-    '#default_value' => variable_get('super_login_placeholder', 1),    
-    '#description' => t('Disable this option to remove the placeholder text within the login and password reset fields.'),    
+    '#title' => t('Enable "placehold" text within fields.'),
+    '#default_value' => variable_get('super_login_placeholder', 1),
+    '#description' => t('Disable this option to remove the placeholder text within the login and password reset fields.'),
   );
 
-  
+
   return system_settings_form($form);
 
 }
